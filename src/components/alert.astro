@@ -1,0 +1,19 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "default" | "destructive";
+
+interface Props extends HTMLAttributes<"div"> {
+	variant?: Variant;
+	title?: string;
+}
+
+const { variant = "default", title, class: className, ...rest } = Astro.props;
+const base = variant === "destructive" ? "alert-destructive" : "alert";
+---
+
+<div class:list={[base, className]} {...rest}>
+	<slot name="icon" />
+	{title && <h2>{title}</h2>}
+	<section><slot /></section>
+</div>

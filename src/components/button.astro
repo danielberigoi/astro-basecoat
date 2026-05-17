@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "secondary" | "destructive" | "outline" | "ghost" | "link";
+type Size = "default" | "sm" | "lg";
+
+interface Props extends HTMLAttributes<"button"> {
+	variant?: Variant;
+	size?: Size;
+	icon?: boolean;
+}
+
+const { variant = "primary", size = "default", icon = false, class: className, ...rest } = Astro.props;
+
+// Basecoat composes class names: btn[-sm|-lg][-icon][-variant]
+const parts = ["btn"];
+if (size === "sm") parts.push("sm");
+else if (size === "lg") parts.push("lg");
+if (icon) parts.push("icon");
+if (variant !== "primary") parts.push(variant);
+const base = parts.join("-");
+---
+
+<button class:list={[base, className]} {...rest}>
+	<slot />
+</button>

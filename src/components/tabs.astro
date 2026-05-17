@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Tab {
+	id: string;
+	label: string;
+}
+
+interface Props extends HTMLAttributes<"div"> {
+	id: string;
+	tabs: Tab[];
+	defaultTab?: string;
+}
+
+const { id, tabs, defaultTab, class: className, ...rest } = Astro.props;
+const active = defaultTab ?? tabs[0]?.id;
+---
+
+<div class:list={["tabs", className]} id={id} {...rest}>
+	<nav role="tablist" aria-orientation="horizontal">
+		{
+			tabs.map((t) => (
+				<button
+					type="button"
+					role="tab"
+					id={`${id}-tab-${t.id}`}
+					aria-controls={`${id}-panel-${t.id}`}
+					aria-selected={t.id === active ? "true" : "false"}
+					tabindex={t.id === active ? 0 : -1}
+				>
+					{t.label}
+				</button>
+			))
+		}
+	</nav>
+	{
+		tabs.map((t) => (
+			<div
+				role="tabpanel"
+				id={`${id}-panel-${t.id}`}
+				aria-labelledby={`${id}-tab-${t.id}`}
+				tabindex={-1}
+				hidden={t.id !== active}
+			>
+				<slot name={t.id} />
+			</div>
+		))
+	}
+</div>
+
+<script>
+	import "basecoat-css/dist/js/basecoat.min.js";
+	import "basecoat-css/dist/js/tabs.min.js";
+</script>

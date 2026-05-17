@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "secondary" | "destructive" | "outline";
+
+interface Props extends HTMLAttributes<"span"> {
+	variant?: Variant;
+}
+
+const { variant = "primary", class: className, ...rest } = Astro.props;
+const base = variant === "primary" ? "badge" : `badge-${variant}`;
+---
+
+<span class:list={[base, className]} {...rest}>
+	<slot />
+</span>

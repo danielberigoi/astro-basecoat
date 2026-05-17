@@ -1,0 +1,69 @@
+{
+  "name": "astro-basecoat",
+  "description": "Astro integration for Basecoat UI — Tailwind v4 + shadcn-style component CLI.",
+  "version": "0.3.11",
+  "author": "danielberigoi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielberigoi/astro-basecoat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/danielberigoi/astro-basecoat/issues"
+  },
+  "homepage": "https://github.com/danielberigoi/astro-basecoat#readme",
+  "keywords": [
+    "astro",
+    "astro-integration",
+    "astro-component",
+    "basecoat",
+    "basecoat-ui",
+    "tailwindcss",
+    "shadcn",
+    "ui",
+    "components",
+    "css"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "astro-basecoat": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "build": "tsgo && node ./scripts/copy-templates.mjs",
+    "demo:install": "npm run build && node ./scripts/install-into-demo.mjs",
+    "demo:dev": "npm run demo:install && npm --prefix ./demo run dev",
+    "format": "biome format --write ./src",
+    "lint": "biome lint --write ./src",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.0.0 || ^6.0.0",
+    "basecoat-css": "^0.3.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.15",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^25.8.0",
+    "@typescript/native-preview": "^7.0.0-dev.20260421.2",
+    "astro": "^6.3.3",
+    "basecoat-css": "^0.3.11",
+    "tailwindcss": "^4.0.0"
+  }
+}

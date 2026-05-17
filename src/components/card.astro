@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+	title?: string;
+	description?: string;
+}
+
+const { title, description, class: className, ...rest } = Astro.props;
+const hasHeader = Astro.slots.has("header") || title || description;
+const hasFooter = Astro.slots.has("footer");
+---
+
+<div class:list={["card", className]} {...rest}>
+	{
+		hasHeader && (
+			<header>
+				<slot name="header">
+					{title && <h2>{title}</h2>}
+					{description && <p>{description}</p>}
+				</slot>
+			</header>
+		)
+	}
+	<section><slot /></section>
+	{hasFooter && <footer><slot name="footer" /></footer>}
+</div>
