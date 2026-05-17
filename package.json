@@ -1,7 +1,7 @@
 {
   "name": "astro-basecoat",
   "description": "Astro integration for Basecoat UI — Tailwind v4 + shadcn-style component CLI.",
-  "version": "0.3.11",
+  "version": "0.1.0",
   "author": "danielberigoi",
   "license": "MIT",
   "repository": {
@@ -45,8 +45,6 @@
   },
   "scripts": {
     "build": "tsgo && node ./scripts/copy-templates.mjs",
-    "demo:install": "npm run build && node ./scripts/install-into-demo.mjs",
-    "demo:dev": "npm run demo:install && npm --prefix ./demo run dev",
     "format": "biome format --write ./src",
     "lint": "biome lint --write ./src",
     "prepublishOnly": "npm run build"

@@ -175,7 +175,6 @@ git clone https://github.com/danielberigoi/astro-basecoat
 cd astro-basecoat
 npm install
 npm run build
-npm run demo:dev   # spins up the demo against your local build
 ```
 
 Adding a new component: drop a file in `src/components/<name>.astro`, run `npm run build`, and it's available via `npx astro-basecoat add <name>` once published.
