@@ -3,6 +3,8 @@
 
 # astro-basecoat
 
+> 🚧 **Work in progress.** APIs, component props, and the CLI may change without notice while this stabilizes. Feedback and issues are very welcome.
+
 Astro integration for [**Basecoat UI**](https://basecoatui.com) — wires up Tailwind v4 and gives you a shadcn-style CLI to drop component source files into your project.
 
 > Every component, every class, and every line of CSS/JS in this package comes from [Basecoat UI](https://basecoatui.com) by [@hunvreus](https://github.com/hunvreus). This integration is a thin Astro-shaped wrapper around their work — please [star the upstream repo](https://github.com/hunvreus/basecoat) and check out the [component gallery](https://basecoatui.com/components/).
