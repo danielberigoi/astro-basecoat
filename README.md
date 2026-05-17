@@ -1,6 +1,11 @@
+<img src="https://astro.build/assets/press/astro-icon-dark.svg" alt="Astro" width="64" height="64">
+<img src="https://basecoatui.com/assets/favicon.svg" alt="Basecoat UI" width="64" height="64">
+
 # astro-basecoat
 
-Astro integration for [Basecoat UI](https://basecoatui.com) — wires up Tailwind v4 and gives you a shadcn-style CLI to drop component source files into your project.
+Astro integration for [**Basecoat UI**](https://basecoatui.com) — wires up Tailwind v4 and gives you a shadcn-style CLI to drop component source files into your project.
+
+> Every component, every class, and every line of CSS/JS in this package comes from [Basecoat UI](https://basecoatui.com) by [@hunvreus](https://github.com/hunvreus). This integration is a thin Astro-shaped wrapper around their work — please [star the upstream repo](https://github.com/hunvreus/basecoat) and check out the [component gallery](https://basecoatui.com/components/).
 
 ```sh
 npm i -D astro-basecoat tailwindcss @tailwindcss/vite basecoat-css
@@ -179,6 +184,17 @@ npm run build
 
 Adding a new component: drop a file in `src/components/<name>.astro`, run `npm run build`, and it's available via `npx astro-basecoat add <name>` once published.
 
+## Credits
+
+This package would not exist without [**Basecoat UI**](https://basecoatui.com) — a beautiful, framework-agnostic Tailwind v4 component library by [@hunvreus](https://github.com/hunvreus). All visual design, CSS, and JS belong to Basecoat. If you find this integration useful, please:
+
+- ⭐ Star [hunvreus/basecoat](https://github.com/hunvreus/basecoat)
+- 📖 Read the [Basecoat docs](https://basecoatui.com)
+- 🎨 Browse the [component gallery](https://basecoatui.com/components/)
+- 💬 Join the conversation on [Basecoat's discussions](https://github.com/hunvreus/basecoat/discussions)
+
+`astro-basecoat` is an independent, community-maintained project and is not affiliated with the Basecoat team.
+
 ## License
 
-MIT © Daniel Berigoi
+MIT © Daniel Berigoi. Basecoat itself is also MIT-licensed by its respective authors.
