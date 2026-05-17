@@ -1,5 +1,10 @@
-<img src="https://astro.build/assets/press/astro-icon-dark.svg" alt="Astro" width="64" height="64">
-<img src="https://basecoatui.com/assets/favicon.svg" alt="Basecoat UI" width="64" height="64">
+<table border=0>
+  <tr>
+    <td><img src="https://astro.build/assets/press/astro-icon-dark.svg" alt="Astro" width="64" height="64"></td>
+    <td><img src="https://basecoatui.com/assets/favicon.svg" alt="Basecoat UI" width="64" height="64"></td>
+  </tr>
+  
+</table>
 
 # astro-basecoat
 
