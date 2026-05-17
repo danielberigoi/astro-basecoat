@@ -13,7 +13,9 @@ type Cmd = "add" | "list" | "help";
 
 async function listTemplates(): Promise<string[]> {
 	const files = await readdir(TEMPLATES_DIR);
-	return files.filter((f) => f.endsWith(".astro")).map((f) => f.replace(/\.astro$/, ""));
+	return files
+		.filter((f) => f.endsWith(".astro"))
+		.map((f) => f.replace(/\.astro$/, ""));
 }
 
 async function prompt(question: string): Promise<string> {
@@ -47,7 +49,9 @@ async function add(names: string[]): Promise<void> {
 		const src = join(TEMPLATES_DIR, `${name}.astro`);
 		const dest = join(targetDir, `${name}.astro`);
 		if (existsSync(dest)) {
-			const answer = (await prompt(`  ${dest} exists. Overwrite? [y/N] `)).trim().toLowerCase();
+			const answer = (await prompt(`  ${dest} exists. Overwrite? [y/N] `))
+				.trim()
+				.toLowerCase();
 			if (answer !== "y" && answer !== "yes") {
 				console.log(`  skipped ${name}`);
 				continue;
@@ -69,7 +73,10 @@ Usage:
 }
 
 async function main(): Promise<void> {
-	const [cmd, ...args] = process.argv.slice(2) as [Cmd | undefined, ...string[]];
+	const [cmd, ...args] = process.argv.slice(2) as [
+		Cmd | undefined,
+		...string[],
+	];
 	switch (cmd) {
 		case "add":
 			await add(args);

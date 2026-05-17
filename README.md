@@ -21,9 +21,11 @@ npm i -D astro-basecoat tailwindcss @tailwindcss/vite basecoat-css
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 import basecoat from 'astro-basecoat';
 
 export default defineConfig({
+  vite: { plugins: [tailwindcss()] },
   integrations: [basecoat()],
 });
 ```
@@ -43,10 +45,11 @@ import Alert from '../components/ui/alert.astro';
 
 ## What this gives you
 
-- **Zero-config Tailwind v4** — the integration auto-installs `@tailwindcss/vite` and injects a stylesheet that pulls in Tailwind + Basecoat. No Vite plugin wiring, no `@import` lines to write.
+- **One stylesheet, both layers** — the integration injects a stylesheet that pulls in Tailwind v4 + Basecoat via `@import`. You wire `@tailwindcss/vite` once (one line in `astro.config.mjs`); the integration handles the rest.
 - **shadcn-style component CLI** — `npx astro-basecoat add <component>` copies `.astro` source files into `src/components/ui/`. You own the code and customize freely.
 - **Per-component JS** — interactive components carry their own `<script>` block. Astro bundles per page and dedupes the shared core, so a page using only `<Button>` ships zero JS.
 - **Type-safe props** — every component is typed; passes through `class` and native attributes.
+- **No JS framework runtime** — components are `.astro`, not React/Vue/Svelte. Pages with only presentational components ship zero JS.
 
 ## Available components
 
@@ -149,20 +152,43 @@ The integration only injects CSS. JS for interactive components is opt-in: each 
 
 Astro bundles per page and dedupes — pages that don't use the component pay nothing.
 
-## Tailwind v4
+## Tailwind v4 setup
 
-The integration wires `@tailwindcss/vite` for you. If you already have `@tailwindcss/vite` registered elsewhere, that's fine — Vite tolerates the duplicate.
+Basecoat is a Tailwind v4 library, so you need Tailwind wired through Vite. The integration injects the combined stylesheet, but you register the Tailwind Vite plugin yourself — this way you control versions and avoid the integration getting in the way of upstream changes.
 
-To customize Tailwind, drop a `tailwind.config.js` (Tailwind v4 reads it automatically when present) or use the new `@theme` block in a CSS file:
+Install the peer deps:
+
+```sh
+npm i -D tailwindcss @tailwindcss/vite basecoat-css
+```
+
+Add the plugin to `astro.config.mjs`:
+
+```js
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import basecoat from 'astro-basecoat';
+
+export default defineConfig({
+  vite: { plugins: [tailwindcss()] },
+  integrations: [basecoat()],
+});
+```
+
+That's it. The integration's stylesheet does `@import "tailwindcss"; @import "basecoat-css";` so both layers land on every page, and your `class="w-full text-sm ..."` utilities work everywhere.
+
+For full Tailwind v4 setup details (theming with `@theme`, custom configs, etc.), see [Tailwind's official Astro guide](https://tailwindcss.com/docs/installation/framework-guides/astro). For Basecoat-specific theming (shadcn-compatible color tokens, dark mode), see the [Basecoat docs](https://basecoatui.com/installation/).
+
+### Theming example
+
+Add a `@theme` block to any CSS file imported from a layout:
 
 ```css
-/* src/styles/theme.css — import this from a layout */
+/* src/styles/theme.css */
 @theme {
   --color-primary: oklch(0.5 0.2 250);
 }
 ```
-
-For shadcn-compatible theming, follow the [Basecoat theming docs](https://basecoatui.com/installation/).
 
 ## Customizing components
 
